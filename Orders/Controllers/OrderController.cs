@@ -15,8 +15,11 @@ public class OrderController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> AddItemToCart(int productid, int count = 1)
+    public async Task<IActionResult> AddItemToCart(int productid, int cartId, int count = 1)
     {
-        
+        if (count < 1)
+            return BadRequest("Count should be equal or greater then 1");
+        if (productid < 1 || cartId < 1)
+            return BadRequest("Wrong ID");
     }
 }
