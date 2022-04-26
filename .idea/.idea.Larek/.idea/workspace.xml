@@ -49,7 +49,7 @@
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
-  <component name="RunManager" selected=".NET Launch Settings Profile.Catalog: IIS Express">
+  <component name="RunManager" selected=".NET Launch Settings Profile.Catalog">
     <configuration name="Catalog" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/Catalog/Catalog.csproj" />
       <option name="LAUNCH_PROFILE_TFM" value="net6.0" />
@@ -218,7 +218,7 @@
       <workItem from="1650615183783" duration="1037000" />
       <workItem from="1650807209452" duration="3795000" />
       <workItem from="1650886361276" duration="705000" />
-      <workItem from="1650890009829" duration="13653000" />
+      <workItem from="1650890009829" duration="13870000" />
     </task>
     <task id="LOCAL-00001" summary="OrderDbContext created">
       <created>1650395190769</created>
