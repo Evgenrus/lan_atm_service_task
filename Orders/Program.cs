@@ -1,3 +1,6 @@
+using Orders.Database;
+using Orders.Service;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +9,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddDbContext<OrderDbContext>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+//builder.Services.AddTransient<IOrderService, OrderService>();
 
 var app = builder.Build();
 
