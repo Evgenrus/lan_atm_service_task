@@ -6,6 +6,7 @@ public interface IOrderService
 {
     public Task<ICollection<Item>> GetAllItems();
     public Task<ICollection<Item>> GetItemById(int id);
+
     public Task<ICollection<Order>> GetAllCustomerOrders(int customerId);
     public Task AddItemToCart(int cartId, Item item, int count);
     public Task ChangeItemCountInCart(int cartId, int cartItemId, int countChange);

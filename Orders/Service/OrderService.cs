@@ -27,7 +27,6 @@ public class OrderService : IOrderService
         // return result;
         throw new NotImplementedException("Not implemented");
     }
-
     public async Task<ICollection<Item>> GetItemById(int id)
     {
         var result = await _context.Items.Where(x => x.ItemId == id).ToListAsync();
