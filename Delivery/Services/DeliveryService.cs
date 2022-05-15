@@ -1,6 +1,8 @@
 using Delivery.Data;
 using Delivery.Data.Entities;
+using Infrastructure.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Extensions;
 
 namespace Delivery.Services;
 
@@ -13,10 +15,46 @@ public class DeliveryService : IDeliveryService
         _context = context;
     }
 
+    public async Task PostNewDelivery(DeliveryInfo delivery)
+    {
+        var deliveryorder = new OrderDelivery
+        {
+            Address = delivery.Address,
+            Status = 0,
+            Receiver = delivery.Receiver
+        };
+        
+        var deliveryItems = new List<DeliveryItem>();
+        if (delivery.ItemsInOrder is null)
+        {
+            throw new Exception("Order is empty");
+        }
+        foreach (var item in delivery.ItemsInOrder)
+        {
+            var delItem = new DeliveryItem
+            {
+                Article = item.Article,
+                Count = item.Count,
+                Name = item.Name,
+                OrderDelivery = deliveryorder
+            };
+            deliveryItems.Add(delItem);
+        }
+        
+        deliveryorder.OrderedItems.AddRange(deliveryItems);
+        
+        await _context.Deliveries.AddAsync(deliveryorder);
+        await _context.DeliveryItems.AddRangeAsync(deliveryItems);
+
+        _context.SaveChanges();
+    }
+
     public async Task<ICollection<OrderDelivery>> GetAllFreeOrders()
     {
         var orders = await _context.Deliveries
-            .Where(x => x.CourierId == null).ToListAsync();
+            .Where(x => x.CourierId == null)
+            .Include(x => x.OrderedItems)
+            .ToListAsync();
         return orders;
     }
 
@@ -100,15 +138,44 @@ public class DeliveryService : IDeliveryService
         await _context.SaveChangesAsync();
     }
 
-    public async Task<OrderDelivery?> DeliveryStatus(int orderId)
+    public async Task<DeliveryInfo> DeliveryStatus(int orderId)
     {
-        var order = await _context.Deliveries
+        var nav =_context.Deliveries.Include(x => x.OrderedItems);
+        var order = await nav
             .SingleOrDefaultAsync(x => x.OrderDeliveryId == orderId);
         if (order is null)
         {
             throw new NotImplementedException("wrong orderId");
         }
 
-        return order;
+        var items = DeliveryItemsToItems(order.OrderedItems);
+
+        var info = new DeliveryInfo
+        {
+            Address = order.Address,
+            DeliveryId = order.OrderDeliveryId,
+            ItemsInOrder = items,
+            Receiver = order.Receiver,
+            Status = order.Status.GetDisplayName()
+        };
+
+        return info;
+    }
+
+    private List<Item> DeliveryItemsToItems(List<DeliveryItem> deliveryItems)
+    {
+        var result = new List<Item>();
+        foreach (var deliveryItem in deliveryItems)
+        {
+            var item = new Item
+            {
+                Article = deliveryItem.Article,
+                Count = deliveryItem.Count,
+                Name = deliveryItem.Name
+            };
+            result.Add(item);
+        }
+
+        return result;
     }
 }
