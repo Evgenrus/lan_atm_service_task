@@ -21,22 +21,43 @@ public class CatalogController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetItemById(int id)
     {
-        var prods = await _service.ItemById(id);
-        return Ok(prods);
+        try
+        {
+            var prods = await _service.ItemById(id);
+            return Ok(prods);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
     }
 
     [HttpGet]
     public async Task<IActionResult> GetItemByName(string name)
     {
-        var prods = await _service.ItemByName(name);
-        return Ok(prods);
+        try
+        {
+            var prods = await _service.ItemByName(name);
+            return Ok(prods);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
     }
 
     [HttpGet]
     public async Task<IActionResult> GetItemsByBrandName(string name)
     {
-        var prods = await _service.ItemsByBrandName(name);
-        return Ok(prods);
+        try
+        {
+            var prods = await _service.ItemsByBrandName(name);
+            return Ok(prods);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
     }
 
     [HttpPost]

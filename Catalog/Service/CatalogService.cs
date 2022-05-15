@@ -57,7 +57,7 @@ public class CatalogService : ICatalogService
         return resProducts;
     }
 
-    public async Task<ProductModel> ItemById(int id)
+    public async Task<ProductModel?> ItemById(int id)
     {
         var prod = await _context.Products.FirstOrDefaultAsync(x => x.ProductId == id);
         if (prod == null)
@@ -66,7 +66,15 @@ public class CatalogService : ICatalogService
         }
 
         var stock = await _context.Stocks.FirstOrDefaultAsync(x => x.ProductStockId == prod.ProductStockId);
+        if (stock is null)
+        {
+            throw new Exception("Unable to check stocks");
+        }
         var brand = await _context.Brands.FirstOrDefaultAsync(x => x.BrandId == prod.BrandId);
+        if (brand is null)
+        {
+            throw new Exception("Unable to find brand");
+        }
         
         return new ProductModel
         {
@@ -79,7 +87,7 @@ public class CatalogService : ICatalogService
         };
     }
 
-    public async Task<ProductModel> ItemByName(string name)
+    public async Task<ProductModel?> ItemByName(string name)
     {
         var prod = await _context.Products.FirstOrDefaultAsync(x => x.Name == name);
         if (prod == null)
@@ -88,7 +96,15 @@ public class CatalogService : ICatalogService
         }
 
         var stock = await _context.Stocks.FirstOrDefaultAsync(x => x.ProductStockId == prod.ProductStockId);
+        if (stock is null)
+        {
+            throw new Exception("Unable to check stocks");
+        }
         var brand = await _context.Brands.FirstOrDefaultAsync(x => x.BrandId == prod.BrandId);
+        if (brand is null)
+        {
+            throw new Exception("Unable to check brand");
+        }
         
         return new ProductModel
         {
@@ -116,6 +132,10 @@ public class CatalogService : ICatalogService
         foreach (var product in brand.Products)
         {
             var stock = await _context.Stocks.FirstOrDefaultAsync(x => x.ProductId == product.ProductId);
+            if (stock is null)
+            {
+                throw new Exception("Unable to check stocks");
+            }
             var model = new ProductModel
             {
                 Brand = brand.BrandId,
