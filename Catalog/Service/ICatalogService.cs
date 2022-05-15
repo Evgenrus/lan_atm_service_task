@@ -4,12 +4,15 @@ namespace Catalog.Service;
 
 public interface ICatalogService
 {
-    public Task<ICollection<ProductModel>> AddProductsToCart(ICollection<ProductModel> productModels);
-    public Task<ICollection<ProductModel>> OrderProducts(ICollection<ProductModel> productModels);
+    public Task<ICollection<Item>> AddProductsToCart(ICollection<Item> productModels);
+    public Task<ICollection<Item>> OrderProducts(ICollection<Item> productModels);
 
-    public Task<ProductModel?> ItemById(int id);
-    public Task<ProductModel?> ItemByName(string name);
-    public Task<ICollection<ProductModel>> ItemsByBrandName(string name);
-    public Task NewItem(ProductModel model);
+    public Task<Item> CheckItem(Item item);
+
+    public Task<Item?> ItemById(int id);
+    public Task<Item?> ItemByName(string name);
+    public Task<ICollection<Item>> ItemsByBrandName(string name);
+    public Task NewItem(Item model);
     public Task NewBrand(BrandModel model);
+    public Task NewCategory(CategoryModel model);
 }
