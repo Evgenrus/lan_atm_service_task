@@ -1,0 +1,18 @@
+﻿using System.Text.Json.Serialization;
+
+namespace Orders.Database.Entities;
+
+public class OrderItem
+{
+    public int OrderItemId { get; set; }
+    
+<<<<<<< HEAD
+    public int? OrderId { get; set; }
+=======
+    public int OrderId { get; set; }
+
+>>>>>>> c326c3706ebe7d8c10b60421c3d5a294ac4c8814
+    [JsonIgnore]
+    public Order? Order { get; set; }
+    public int Count { get; set; }
+}
