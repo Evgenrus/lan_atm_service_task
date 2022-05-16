@@ -11,9 +11,17 @@
     <projectFile profileName="IIS Express">Delivery/Delivery.csproj</projectFile>
     <projectFile profileName="Infrastructure">Infrastructure/Infrastructure.csproj</projectFile>
     <projectFile profileName="IIS Express">Infrastructure/Infrastructure.csproj</projectFile>
+    <projectFile profileName="Delivery">Delivery/Delivery/Delivery.csproj</projectFile>
+    <projectFile profileName="IIS Express">Delivery/Delivery/Delivery.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6f7c3176-452c-4b48-a599-9809bccb5aad" name="Changes" comment="" />
+    <list default="true" id="6f7c3176-452c-4b48-a599-9809bccb5aad" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Larek/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Larek/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Delivery/Delivery/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Delivery/Delivery/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Delivery/Program.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Larek.sln" beforeDir="false" afterPath="$PROJECT_DIR$/Larek.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Orders/Controllers/OrderController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Orders/Controllers/OrderController.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -22,16 +30,21 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Order" />
+        <entry key="$PROJECT_DIR$" value="Catalog" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="MIXED" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/6baa723996371c059e7bc78969f2f20741024ce6de0f080dcc5964225c3303a/ServiceProvider.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Delivery/obj/Debug/net6.0/.NETCoreApp,Version=v6.0.AssemblyAttributes.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="SWEA" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="280UsWQX0U6XysLl7ty7jl2toBx" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -42,6 +55,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="sqlserver.localdb" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -49,7 +63,7 @@
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
-  <component name="RunManager" selected=".NET Launch Settings Profile.Catalog">
+  <component name="RunManager" selected=".NET Launch Settings Profile.Delivery">
     <configuration name="Catalog" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/Catalog/Catalog.csproj" />
       <option name="LAUNCH_PROFILE_TFM" value="net6.0" />
@@ -219,6 +233,10 @@
       <workItem from="1650807209452" duration="3795000" />
       <workItem from="1650886361276" duration="705000" />
       <workItem from="1650890009829" duration="13870000" />
+      <workItem from="1652024922927" duration="2168000" />
+      <workItem from="1652168266423" duration="2088000" />
+      <workItem from="1652262473336" duration="7573000" />
+      <workItem from="1652429532430" duration="2476000" />
     </task>
     <task id="LOCAL-00001" summary="OrderDbContext created">
       <created>1650395190769</created>
@@ -234,7 +252,14 @@
       <option name="project" value="LOCAL" />
       <updated>1650615289143</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="1">
+      <created>1651732867885</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1651732867885</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -254,7 +279,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="Order" />
+                        <option value="origin/dev" />
                       </list>
                     </value>
                   </entry>
@@ -270,6 +295,7 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="OrderDbContext created" />
     <MESSAGE value="controller" />
-    <option name="LAST_COMMIT_MESSAGE" value="controller" />
+    <MESSAGE value="1" />
+    <option name="LAST_COMMIT_MESSAGE" value="1" />
   </component>
 </project>
