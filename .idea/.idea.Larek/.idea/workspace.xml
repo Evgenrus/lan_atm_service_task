@@ -15,12 +15,16 @@
     <projectFile profileName="IIS Express">Delivery/Delivery/Delivery.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6f7c3176-452c-4b48-a599-9809bccb5aad" name="Changes" comment="">
+    <list default="true" id="a2de98e1-0ef4-4250-8dd2-53b5e7278d32" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Larek/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Larek/.idea/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Larek/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Larek/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Delivery/Delivery/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Delivery/Delivery/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Delivery/Program.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Larek.sln" beforeDir="false" afterPath="$PROJECT_DIR$/Larek.sln" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Orders/Controllers/OrderController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Orders/Controllers/OrderController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Orders/Database/Entities/Customer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Orders/Database/Entities/Customer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Orders/Service/IOrderService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Orders/Service/IOrderService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Orders/Service/OrderService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Orders/Service/OrderService.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,8 +41,12 @@
     <option name="RESET_MODE" value="MIXED" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/16e6dcaab0be4156ad31af88b1ed8700a20698/be/9e92afe9/ThrowHelper.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Infrastructure/Models/Item.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/6baa723996371c059e7bc78969f2f20741024ce6de0f080dcc5964225c3303a/ServiceProvider.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/198a6261cebc324728dcc4c178edc5f2894123f711722c80e8557cbfd27651/ThrowHelper.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Delivery/obj/Debug/net6.0/.NETCoreApp,Version=v6.0.AssemblyAttributes.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/575c31ecc35a636b6f962cb71d53992552941a18982aae1c8e6c16305cc3761b/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -63,7 +71,7 @@
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
-  <component name="RunManager" selected=".NET Launch Settings Profile.Delivery">
+  <component name="RunManager" selected=".NET Launch Settings Profile.Catalog: IIS Express">
     <configuration name="Catalog" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/Catalog/Catalog.csproj" />
       <option name="LAUNCH_PROFILE_TFM" value="net6.0" />
@@ -214,11 +222,23 @@
         <option name="Build" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue=".NET Launch Settings Profile.Catalog" />
+      <item itemvalue=".NET Launch Settings Profile.Catalog: IIS Express" />
+      <item itemvalue=".NET Launch Settings Profile.Delivery" />
+      <item itemvalue=".NET Launch Settings Profile.Delivery: IIS Express" />
+      <item itemvalue=".NET Launch Settings Profile.Infrastructure" />
+      <item itemvalue=".NET Launch Settings Profile.Infrastructure: IIS Express" />
+      <item itemvalue=".NET Launch Settings Profile.Larek" />
+      <item itemvalue=".NET Launch Settings Profile.Larek: IIS Express" />
+      <item itemvalue=".NET Launch Settings Profile.Orders" />
+      <item itemvalue=".NET Launch Settings Profile.Orders: IIS Express" />
+    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="6f7c3176-452c-4b48-a599-9809bccb5aad" name="Changes" comment="" />
+      <changelist id="a2de98e1-0ef4-4250-8dd2-53b5e7278d32" name="Changes" comment="" />
       <created>1650353218878</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -237,6 +257,7 @@
       <workItem from="1652168266423" duration="2088000" />
       <workItem from="1652262473336" duration="7573000" />
       <workItem from="1652429532430" duration="2476000" />
+      <workItem from="1652696862932" duration="244000" />
     </task>
     <task id="LOCAL-00001" summary="OrderDbContext created">
       <created>1650395190769</created>
@@ -297,5 +318,128 @@
     <MESSAGE value="controller" />
     <MESSAGE value="1" />
     <option name="LAST_COMMIT_MESSAGE" value="1" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Orders/Service/OrderService.cs</url>
+          <line>78</line>
+          <properties documentPath="D:\dev\Larek\Larek\Orders\Service\OrderService.cs" initialLine="68" containingFunctionPresentation="method 'ChangeItemCountInCart'">
+            <startOffsets>
+              <option value="2083" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2140" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Orders/Service/OrderService.cs</url>
+          <line>83</line>
+          <properties documentPath="D:\dev\Larek\Larek\Orders\Service\OrderService.cs" initialLine="73" containingFunctionPresentation="method 'ChangeItemCountInCart'">
+            <startOffsets>
+              <option value="2306" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2367" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Orders/Service/OrderService.cs</url>
+          <line>90</line>
+          <properties documentPath="D:\dev\Larek\Larek\Orders\Service\OrderService.cs" initialLine="80" containingFunctionPresentation="method 'ChangeItemCountInCart'">
+            <startOffsets>
+              <option value="2484" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2551" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Orders/Service/OrderService.cs</url>
+          <line>106</line>
+          <properties documentPath="D:\dev\Larek\Larek\Orders\Service\OrderService.cs" initialLine="96" containingFunctionPresentation="method 'CreateOrder'">
+            <startOffsets>
+              <option value="2941" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2992" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Orders/Service/OrderService.cs</url>
+          <line>112</line>
+          <properties documentPath="D:\dev\Larek\Larek\Orders\Service\OrderService.cs" initialLine="102" containingFunctionPresentation="method 'CreateOrder'">
+            <startOffsets>
+              <option value="3160" />
+            </startOffsets>
+            <endOffsets>
+              <option value="3212" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Orders/Service/OrderService.cs</url>
+          <line>118</line>
+          <properties documentPath="D:\dev\Larek\Larek\Orders\Service\OrderService.cs" initialLine="108" containingFunctionPresentation="method 'CreateOrder'">
+            <startOffsets>
+              <option value="3346" />
+            </startOffsets>
+            <endOffsets>
+              <option value="3402" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Orders/Service/OrderService.cs</url>
+          <line>139</line>
+          <properties documentPath="D:\dev\Larek\Larek\Orders\Service\OrderService.cs" initialLine="129" containingFunctionPresentation="method 'CancelOrder'">
+            <startOffsets>
+              <option value="3921" />
+            </startOffsets>
+            <endOffsets>
+              <option value="3972" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Orders/Service/OrderService.cs</url>
+          <line>151</line>
+          <properties documentPath="D:\dev\Larek\Larek\Orders\Service\OrderService.cs" initialLine="141" containingFunctionPresentation="method 'FinishOrder'">
+            <startOffsets>
+              <option value="4260" />
+            </startOffsets>
+            <endOffsets>
+              <option value="4311" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Orders/Controllers/OrderController.cs</url>
+          <line>65</line>
+          <properties documentPath="D:\dev\Larek\Larek\Orders\Controllers\OrderController.cs" initialLine="33" containingFunctionPresentation="method 'PostItemToCart'">
+            <startOffsets>
+              <option value="914" />
+            </startOffsets>
+            <endOffsets>
+              <option value="943" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
