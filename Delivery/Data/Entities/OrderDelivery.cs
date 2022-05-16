@@ -20,6 +20,8 @@ public class OrderDelivery
 
     public string Address { get; set; }
 
+    public string Receiver { get; set; }
+
     public DeliveryStatus Status { get; set; } = DeliveryStatus.Free;
 
     public virtual List<DeliveryItem> OrderedItems { get; set; } = new List<DeliveryItem>();

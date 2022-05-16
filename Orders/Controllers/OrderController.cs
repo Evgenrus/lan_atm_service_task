@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Infrastructure.Models;
+using Infrastructure.PostForms;
+using Microsoft.AspNetCore.Mvc;
 using Orders.Database;
 using Orders.Database.Entities;
 using Orders.Service;
@@ -7,7 +9,7 @@ namespace Orders.Controllers;
 
 [ApiController]
 [Route("api/v1/[controller]/[action]")]
-public class OrderController : Controller
+public class OrderController : ControllerBase
 {
     private OrderDbContext _context { get; set; }
     private IOrderService _service { get; set; }
@@ -18,16 +20,48 @@ public class OrderController : Controller
         _service = orderService;
     }
 
-    [HttpPost]
-    public async Task<IActionResult> PostItemToCart(Item item, int cartId, int count = 1)
+    [HttpGet]
+    public async Task<IActionResult> CartItems(int id)
     {
-        if (count < 1)
+        try
+        {
+            var res = _service.CartItems(id);
+            return Ok(res);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> NewCustomer(NewCustomerModel model)
+    {
+        try
+        {
+            await _service.NewCustomer(model);
+            return Ok();
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> PostItemToCart([FromBody] AddItemToCartForm form)
+    {
+        if (form.Count < 1)
             return BadRequest("Count should be equal or greater then 1");
-        if (cartId < 1)
+        if (form.CartId < 1)
             return BadRequest("Wrong ID");
         try
         {
-            await _service.AddItemToCart(cartId, item, count);
+            await _service.AddItemToCart(form.CartId, form.item, form.Count);
+        }
+        catch (HttpRequestException ex)
+        {
+            return BadRequest("Couldn't check item");
         }
         catch (Exception e)
         {
@@ -58,7 +92,7 @@ public class OrderController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateOrder(int cartId)
+    public async Task<IActionResult> CreateOrder([FromBody]int cartId)
     {
         if (cartId < 1)
         {

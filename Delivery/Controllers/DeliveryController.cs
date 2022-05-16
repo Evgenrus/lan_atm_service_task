@@ -1,6 +1,7 @@
 using Delivery.Data;
 using Delivery.Data.Entities;
 using Delivery.Services;
+using Infrastructure.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Delivery.Controllers;
@@ -14,6 +15,20 @@ public class DeliveryController : ControllerBase
     public DeliveryController(IDeliveryService service)
     {
         _service = service;
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> PostNewDelivery(DeliveryInfo delivery)
+    {
+        try
+        {
+            await _service.PostNewDelivery(delivery);
+            return Ok();
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
     }
 
     [HttpGet]

@@ -19,31 +19,73 @@ public class CatalogController : ControllerBase
     }
 
     [HttpGet]
+    public async Task<IActionResult> CheckItem(Item item)
+    {
+        try
+        {
+            var res = await _service.CheckItem(item);
+            return Ok(res);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+
+    [HttpGet]
     public async Task<IActionResult> GetItemById(int id)
     {
-        var prods = await _service.ItemById(id);
-        return Ok(prods);
+        try
+        {
+            var prods = await _service.ItemById(id);
+            return Ok(prods);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
     }
 
     [HttpGet]
     public async Task<IActionResult> GetItemByName(string name)
     {
-        var prods = await _service.ItemByName(name);
-        return Ok(prods);
+        try
+        {
+            var prods = await _service.ItemByName(name);
+            return Ok(prods);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
     }
 
     [HttpGet]
     public async Task<IActionResult> GetItemsByBrandName(string name)
     {
-        var prods = await _service.ItemsByBrandName(name);
-        return Ok(prods);
+        try
+        {
+            var prods = await _service.ItemsByBrandName(name);
+            return Ok(prods);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
     }
 
     [HttpPost]
-    public async Task<IActionResult> PostNewItem(ProductModel model)
+    public async Task<IActionResult> PostNewItem(Item model)
     {
-        await _service.NewItem(model);
-        return Ok();
+        try
+        {
+            await _service.NewItem(model);
+            return Ok();
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
     }
 
     [HttpPost]
@@ -51,5 +93,19 @@ public class CatalogController : ControllerBase
     {
         await _service.NewBrand(model);
         return Ok();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> PostNewCategory(CategoryModel model)
+    {
+        try
+        {
+            await _service.NewCategory(model);
+            return Ok();
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
     }
 }

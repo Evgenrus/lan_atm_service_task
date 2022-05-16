@@ -15,19 +15,19 @@ public class CatalogService : ICatalogService
         _context = context;
     }
 
-    public async Task<ICollection<ProductModel>> AddProductsToCart(ICollection<ProductModel> productModels)
+    public async Task<ICollection<Item>> AddProductsToCart(ICollection<Item> productModels)
     {
-        var resProducts = new List<ProductModel>();
+        var resProducts = new List<Item>();
 
         foreach (var product in productModels)
         {
-            var res = await _context.Products.FirstOrDefaultAsync(a => a.ProductId == product.Id);
+            var res = await _context.Products.FirstOrDefaultAsync(a => a.Article == product.Article);
             if (res == null)
-                throw new ArgumentException($"No such product ID: {product.Id}");
+                throw new ArgumentException($"No such product Article: {product.Article}");
             
-            var stock = await _context.Stocks.FirstOrDefaultAsync(a => a.ProductId == product.Id);
+            var stock = await _context.Stocks.FirstOrDefaultAsync(a => a.ProductId == res.ProductId);
             if (stock.Stock < product.Count)
-                throw new ArgumentException($"Product {product.Id} stock is {stock.Stock}");
+                throw new ArgumentException($"Product {product.Article} stock is {stock.Stock}");
 
             resProducts.Add(product);
         }
@@ -35,19 +35,19 @@ public class CatalogService : ICatalogService
         return resProducts;
     }
 
-    public async Task<ICollection<ProductModel>> OrderProducts(ICollection<ProductModel> productModels)
+    public async Task<ICollection<Item>> OrderProducts(ICollection<Item> productModels)
     {
-        var resProducts = new List<ProductModel>();
+        var resProducts = new List<Item>();
 
         foreach (var product in productModels)
         {
-            var res = await _context.Products.FirstOrDefaultAsync(a => a.ProductId == product.Id);
+            var res = await _context.Products.FirstOrDefaultAsync(a => a.Article == product.Article);
             if (res == null)
-                throw new ArgumentException($"No such product ID: {product.Id}");
+                throw new ArgumentException($"No such product: Article {product.Article}");
             
-            var stock = await _context.Stocks.FirstOrDefaultAsync(a => a.ProductId == product.Id);
+            var stock = await _context.Stocks.FirstOrDefaultAsync(a => a.ProductId == res.ProductId);
             if (stock.Stock < product.Count)
-                throw new ArgumentException($"Product {product.Id} stock is {stock.Stock}");
+                throw new ArgumentException($"Product {product.Name} stock is {stock.Stock}");
 
             stock.Stock -= product.Count;
 
@@ -57,54 +57,108 @@ public class CatalogService : ICatalogService
         return resProducts;
     }
 
-    public async Task<ProductModel> ItemById(int id)
+    public async Task<Item> CheckItem(Item item)
     {
-        var prod = await _context.Products.FirstOrDefaultAsync(x => x.ProductId == id);
+        var itemcatalog = _context.Products
+            .Include(x => x.Brand)
+            .Include(x => x.Category)
+            .Include(x => x.Stock);
+
+        var check = await itemcatalog.FirstOrDefaultAsync(x => x.Name == item.Name
+                                                         && x.Article == item.Article);
+        if (check is null)
+        {
+            throw new Exception("No such item");
+        }
+
+        if (check.Stock.Stock < item.Count)
+        {
+            throw new Exception($"requested {item.Count} items, but got inly {check.Stock.Stock}");
+        }
+
+        return new Item
+        {
+            Article = item.Article,
+            Brand = check.Brand.Name,
+            Category = check.Category.Name,
+            Count = item.Count,
+            ItemId = check.ProductId,
+            Name = item.Name
+        };
+    }
+
+    public async Task<Item?> ItemById(int id)
+    {
+        var nav = _context.Products.Include(x => x.Category);
+        var prod = await nav.FirstOrDefaultAsync(x => x.ProductId == id);
         if (prod == null)
         {
             throw new ArgumentException("Wrong Id");
         }
 
         var stock = await _context.Stocks.FirstOrDefaultAsync(x => x.ProductStockId == prod.ProductStockId);
-        var brand = await _context.Brands.FirstOrDefaultAsync(x => x.BrandId == prod.BrandId);
-        
-        return new ProductModel
+        if (stock is null)
         {
-            Brand = brand.BrandId, 
+            throw new Exception("Unable to check stocks");
+        }
+        var brand = await _context.Brands.FirstOrDefaultAsync(x => x.BrandId == prod.BrandId);
+        if (brand is null)
+        {
+            throw new Exception("Unable to find brand");
+        }
+        
+        return new Item
+        {
+            Brand = brand.Name, 
             Count = stock.Stock, 
-            Descr = prod.Description,
             Name = prod.Name,
-            Id = prod.ProductId,
-            Category = prod.CategoryId
+            ItemId = prod.ProductId,
+            Category = prod.Category.Name,
+            Article = prod.Article
         };
     }
 
-    public async Task<ProductModel> ItemByName(string name)
+    public async Task<Item?> ItemByName(string name)
     {
-        var prod = await _context.Products.FirstOrDefaultAsync(x => x.Name == name);
+        var nav = _context.Products.Include(x => x.Category);
+        var prod = await nav.FirstOrDefaultAsync(x => x.Name == name);
         if (prod == null)
         {
             throw new ArgumentException("Wrong Product Name");
         }
 
         var stock = await _context.Stocks.FirstOrDefaultAsync(x => x.ProductStockId == prod.ProductStockId);
-        var brand = await _context.Brands.FirstOrDefaultAsync(x => x.BrandId == prod.BrandId);
-        
-        return new ProductModel
+        if (stock is null)
         {
-            Brand = brand.BrandId, 
+            throw new Exception("Unable to check stocks");
+        }
+        var brand = await _context.Brands.FirstOrDefaultAsync(x => x.BrandId == prod.BrandId);
+        if (brand is null)
+        {
+            throw new Exception("Unable to check brand");
+        }
+        
+        var res = new Item
+        {
+            Brand = brand.Name, 
             Count = stock.Stock, 
-            Descr = prod.Description,
             Name = prod.Name,
-            Id = prod.ProductId,
-            Category = prod.CategoryId
+            ItemId = prod.ProductId,
+            Category = prod.Category.Name,
+            Article = prod.Article,
+            Descr = prod.Description
         };
+
+        return res;
     }
 
-    public async Task<ICollection<ProductModel>> ItemsByBrandName(string name)
+    public async Task<ICollection<Item>> ItemsByBrandName(string name)
     {
-        var res = new List<ProductModel>();
-        var brand = await _context.Brands.FirstOrDefaultAsync(x => x.Name == name);
+        var res = new List<Item>();
+        var nav = _context.Brands
+            .Include(x => x.Products)
+            .ThenInclude(y => y.Category);
+        var brand = await nav.FirstOrDefaultAsync(x => x.Name == name);
         if (brand == null)
         {
             throw new ArgumentException("Wrong Brand Name");
@@ -116,14 +170,18 @@ public class CatalogService : ICatalogService
         foreach (var product in brand.Products)
         {
             var stock = await _context.Stocks.FirstOrDefaultAsync(x => x.ProductId == product.ProductId);
-            var model = new ProductModel
+            if (stock is null)
             {
-                Brand = brand.BrandId,
-                Count = stock.Stock,
-                Descr = product.Description,
-                Id = product.ProductId,
+                throw new Exception("Unable to check stocks");
+            }
+            var model = new Item
+            {
+                Brand = brand.Name, 
+                Count = stock.Stock, 
                 Name = product.Name,
-                Category = product.CategoryId
+                ItemId = product.ProductId,
+                Category = product.Category.Name,
+                Article = product.Article
             };
             res.Add(model);
         }
@@ -131,18 +189,19 @@ public class CatalogService : ICatalogService
         return res;
     }
 
-    public async Task NewItem(ProductModel model)
+    public async Task NewItem(Item model)
     {
-        var brand = await _context.Brands.FirstOrDefaultAsync(x => x.BrandId == model.Brand);
+        var brand = await _context.Brands.FirstOrDefaultAsync(x => x.Name == model.Brand);
         if (brand == null)
             throw new ArgumentException("No such Brand");
-        var category = await _context.Categories.FirstOrDefaultAsync(x => x.CategoryId == model.Category);
+        var category = await _context.Categories.FirstOrDefaultAsync(x => x.Name == model.Category);
         if (category == null)
             throw new ArgumentException("No such category");
         var prod = new Product
         {
             Brand = brand,
             BrandId = brand.BrandId,
+            Article = model.Article,
             Category = category,
             CategoryId = category.CategoryId,
             Description = model.Descr,
@@ -163,5 +222,26 @@ public class CatalogService : ICatalogService
         var brand = await _context.Brands.FirstOrDefaultAsync(x => x.Name == model.Name);
         if (brand != null)
             throw new ArgumentException("Brand already exists");
+        Brand result = new Brand
+        {
+            Description = model.Descr,
+            Name = model.Name
+        };
+        _context.Brands.Add(result);
+        _context.SaveChanges();
+    }
+
+    public async Task NewCategory(CategoryModel model)
+    {
+        var category = await _context.Categories.FirstOrDefaultAsync(x => x.Name == model.Name);
+        if (category is not null)
+            throw new Exception("Category already exists");
+        Category res = new Category
+        {
+            Name = model.Name
+        };
+
+        _context.Categories.Add(res);
+        _context.SaveChanges();
     }
 }

@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Larek", "Larek\Larek.csproj", "{B1988550-7EC7-4D29-AB12-C08BDC47F158}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalog", "Catalog\Catalog.csproj", "{976DB205-CC22-4167-A5E8-A05298FEF25A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orders", "Orders\Orders.csproj", "{15A9538C-3532-4CAA-A44B-F340F6FD79E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{58BFE639-87DE-4CEF-B16D-20CD3EB3CDD4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B1988550-7EC7-4D29-AB12-C08BDC47F158}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1988550-7EC7-4D29-AB12-C08BDC47F158}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1988550-7EC7-4D29-AB12-C08BDC47F158}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1988550-7EC7-4D29-AB12-C08BDC47F158}.Release|Any CPU.Build.0 = Release|Any CPU
+		{976DB205-CC22-4167-A5E8-A05298FEF25A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{976DB205-CC22-4167-A5E8-A05298FEF25A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{976DB205-CC22-4167-A5E8-A05298FEF25A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{976DB205-CC22-4167-A5E8-A05298FEF25A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15A9538C-3532-4CAA-A44B-F340F6FD79E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15A9538C-3532-4CAA-A44B-F340F6FD79E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15A9538C-3532-4CAA-A44B-F340F6FD79E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15A9538C-3532-4CAA-A44B-F340F6FD79E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58BFE639-87DE-4CEF-B16D-20CD3EB3CDD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58BFE639-87DE-4CEF-B16D-20CD3EB3CDD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58BFE639-87DE-4CEF-B16D-20CD3EB3CDD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58BFE639-87DE-4CEF-B16D-20CD3EB3CDD4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

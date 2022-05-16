@@ -6,7 +6,6 @@ namespace Orders.Database;
 public class OrderDbContext : DbContext
 {
     public DbSet<Order> Orders { get; set; }
-    public DbSet<Item> Items { get; set; }
     public DbSet<OrderItem> OrderItems { get; set; }
     public DbSet<Customer> Customers { get; set; }
     public DbSet<Cart> Carts { get; set; }
@@ -45,19 +44,9 @@ public class OrderDbContext : DbContext
             .WithOne(b => b.Order)
             .HasForeignKey(c => c.OrderId);
 
-        modelBuilder.Entity<OrderItem>()
-            .HasOne(a => a.Item)
-            .WithMany(b => b.OrderItems)
-            .HasForeignKey(c => c.ItemId);
-
         modelBuilder.Entity<Cart>()
             .HasMany(a => a.Items)
             .WithOne(b => b.Cart)
             .HasForeignKey(c => c.CartId);
-
-        modelBuilder.Entity<CartItem>()
-            .HasOne(a => a.Item)
-            .WithMany(b => b.CartItems)
-            .HasForeignKey(c => c.CartItemId);
     }
 }
