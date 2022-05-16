@@ -11,8 +11,10 @@ public class Order
 
     public bool IsFinished { get; set; } = false;
     public bool IsCanceled { get; set; } = false;
+    public int? CustomerId { get; set; }
+
     [JsonIgnore]
-    //public Customer Customer { get; set; }
+    public Customer? Customer { get; set; }
 
     public List<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
 }
