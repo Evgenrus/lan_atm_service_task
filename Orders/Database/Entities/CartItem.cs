@@ -9,10 +9,6 @@ public class CartItem
     public int CartId { get; set; }
     [JsonIgnore]
     public Cart Cart { get; set; }
-
-    public int ItemId { get; set; }
-    [JsonIgnore]
-    public Item Item { get; set; }
     
     public int Count { get; set; }
 }

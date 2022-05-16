@@ -1,4 +1,5 @@
 ﻿using System.Runtime.InteropServices;
+using Infrastructure.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Orders.Database;
@@ -14,24 +15,12 @@ public class OrderService : IOrderService
     {
         _context = context;
     }
-    
-    public async Task<ICollection<Item>> GetAllItems()
-    {
-        var result = await _context.Items.ToListAsync();
-        return result;
-    }
 
     public async Task<ICollection<Order>> GetAllCustomerOrders(int customerId)
     {
-        // var result = await _context.Orders.Where(x => x.CustomerId == customerId).ToListAsync();
-        // return result;
-        throw new NotImplementedException("Not implemented");
-    }
-
-    public async Task<ICollection<Item>> GetItemById(int id)
-    {
-        var result = await _context.Items.Where(x => x.ItemId == id).ToListAsync();
+        var result = await _context.Orders.Where(x => x.CustomerId == customerId).ToListAsync();
         return result;
+        //throw new NotImplementedException("Not implemented");
     }
 
     public async Task AddItemToCart(int cartId, Item item, int count)
@@ -39,23 +28,14 @@ public class OrderService : IOrderService
         var cart = await _context.Carts.SingleOrDefaultAsync(x => x.CartId == cartId) ?? new Cart();
 
         //TODO Check item in catalog
-        // var checkitem = await _context.Items.SingleOrDefaultAsync(
-        //     x => x.ItemId == item.ItemId && x.Name == item.Name);
-        // if (checkitem == null)
-        // {
-        //     throw new ArgumentException("no such item");
-        // }
-        
+
         //TODO check stocks request
-        await _context.Items.AddAsync(item);
 
         var itemcart = new CartItem
         {
             Cart = cart,
             CartId = cart.CartId, 
-            Count = count, 
-            Item = item, 
-            ItemId = item.ItemId
+            Count = count
         };
 
         await _context.CartItems.AddAsync(itemcart);
@@ -92,6 +72,9 @@ public class OrderService : IOrderService
 
     public async Task CreateOrder(int cartId)
     {
+        var order = new Order();
+        await _context.Orders.AddAsync(order);
+
         var cart = await _context.Carts.SingleOrDefaultAsync(x => x.CartId == cartId);
         if (cart is null)
         {
@@ -104,14 +87,11 @@ public class OrderService : IOrderService
             throw new NotImplementedException("Order is empty");
         }
 
-        var orderItems = await CartItemsToOrderItems(cartItems);
+        var orderItems = await CartItemsToOrderItems(cartItems, order);
         if (orderItems.Count <= 0)
         {
             throw new NotImplementedException("OrderList is empty");
         }
-
-        var order = new Order();
-        await _context.Orders.AddAsync(order);
 
         foreach (var item in orderItems)
         {
@@ -148,7 +128,7 @@ public class OrderService : IOrderService
     }
 
     //Convert ICollection of CartItems to ICollection of OrderItems
-    private async Task<ICollection<OrderItem>> CartItemsToOrderItems(ICollection<CartItem> cartItems)
+    private async Task<ICollection<OrderItem>> CartItemsToOrderItems(ICollection<CartItem> cartItems, Order order)
     {
         // var order = new Order();
         // await _context.Orders.AddAsync(order);
@@ -159,10 +139,8 @@ public class OrderService : IOrderService
             var item = new OrderItem
             {
                 Count = cartItem.Count,
-                Item = cartItem.Item,
-                ItemId = cartItem.ItemId,
-                //Order = order,
-                //OrderId = order.OrderId
+                Order = order,
+                OrderId = order.OrderId
             };
             orderItems.Add(item);
         }

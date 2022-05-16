@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Infrastructure.Models;
+using Microsoft.AspNetCore.Mvc;
 using Orders.Database;
 using Orders.Database.Entities;
 using Orders.Service;
@@ -7,7 +8,7 @@ namespace Orders.Controllers;
 
 [ApiController]
 [Route("api/v1/[controller]/[action]")]
-public class OrderController : Controller
+public class OrderController : ControllerBase
 {
     private OrderDbContext _context { get; set; }
     private IOrderService _service { get; set; }
