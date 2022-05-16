@@ -11,6 +11,7 @@ public class OrderDbContext : DbContext
     public DbSet<Cart> Carts { get; set; }
     public DbSet<CartItem> CartItems { get; set; }
 
+
     public OrderDbContext(DbContextOptions<OrderDbContext> options) 
         : base(options)
     {
@@ -32,6 +33,7 @@ public class OrderDbContext : DbContext
         base.OnModelCreating(modelBuilder);
         
         //Configuring foreign keys
+
         // modelBuilder.Entity<Customer>()
         //     .HasMany(a => a.Orders)
         //     .WithOne(b => b.Customer)

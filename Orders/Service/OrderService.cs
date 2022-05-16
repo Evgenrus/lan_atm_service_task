@@ -19,6 +19,13 @@ public class OrderService : IOrderService
     public async Task<ICollection<Order>> GetAllCustomerOrders(int customerId)
     {
         var result = await _context.Orders.Where(x => x.CustomerId == customerId).ToListAsync();
+        // var result = await _context.Orders.Where(x => x.CustomerId == customerId).ToListAsync();
+        // return result;
+        throw new NotImplementedException("Not implemented");
+    }
+    public async Task<ICollection<Item>> GetItemById(int id)
+    {
+        var result = await _context.Items.Where(x => x.ItemId == id).ToListAsync();
         return result;
         //throw new NotImplementedException("Not implemented");
     }
