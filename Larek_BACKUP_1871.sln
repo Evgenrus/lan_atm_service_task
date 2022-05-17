@@ -1,15 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Larek", "Larek\Larek.csproj", "{B1988550-7EC7-4D29-AB12-C08BDC47F158}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32210.238
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Larek", "Larek\Larek.csproj", "{B1988550-7EC7-4D29-AB12-C08BDC47F158}"
 EndProject
-
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalog", "Catalog\Catalog.csproj", "{976DB205-CC22-4167-A5E8-A05298FEF25A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catalog", "Catalog\Catalog.csproj", "{976DB205-CC22-4167-A5E8-A05298FEF25A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orders", "Orders\Orders.csproj", "{15A9538C-3532-4CAA-A44B-F340F6FD79E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Orders", "Orders\Orders.csproj", "{15A9538C-3532-4CAA-A44B-F340F6FD79E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{58BFE639-87DE-4CEF-B16D-20CD3EB3CDD4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{58BFE639-87DE-4CEF-B16D-20CD3EB3CDD4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{BAC8F754-FC3E-4646-A905-2B6C9EB2DD53}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Delivery", "Delivery\Delivery.csproj", "{38EDCE68-8000-4284-8216-6CBC8476EAAB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,7 +23,6 @@ Global
 		{B1988550-7EC7-4D29-AB12-C08BDC47F158}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1988550-7EC7-4D29-AB12-C08BDC47F158}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1988550-7EC7-4D29-AB12-C08BDC47F158}.Release|Any CPU.Build.0 = Release|Any CPU
-
 		{976DB205-CC22-4167-A5E8-A05298FEF25A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{976DB205-CC22-4167-A5E8-A05298FEF25A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{976DB205-CC22-4167-A5E8-A05298FEF25A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -30,13 +31,19 @@ Global
 		{15A9538C-3532-4CAA-A44B-F340F6FD79E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15A9538C-3532-4CAA-A44B-F340F6FD79E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{15A9538C-3532-4CAA-A44B-F340F6FD79E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58BFE639-87DE-4CEF-B16D-20CD3EB3CDD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58BFE639-87DE-4CEF-B16D-20CD3EB3CDD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58BFE639-87DE-4CEF-B16D-20CD3EB3CDD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58BFE639-87DE-4CEF-B16D-20CD3EB3CDD4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{38EDCE68-8000-4284-8216-6CBC8476EAAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{38EDCE68-8000-4284-8216-6CBC8476EAAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{38EDCE68-8000-4284-8216-6CBC8476EAAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{38EDCE68-8000-4284-8216-6CBC8476EAAB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BAC8F754-FC3E-4646-A905-2B6C9EB2DD53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BAC8F754-FC3E-4646-A905-2B6C9EB2DD53}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BAC8F754-FC3E-4646-A905-2B6C9EB2DD53}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BAC8F754-FC3E-4646-A905-2B6C9EB2DD53}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0BCE106C-0654-41BC-9834-33DDC4FE39EC}
 	EndGlobalSection
 EndGlobal
