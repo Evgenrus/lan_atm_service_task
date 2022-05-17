@@ -18,8 +18,8 @@ public class CatalogController : ControllerBase
         _service = service;
     }
 
-    [HttpGet]
-    public async Task<IActionResult> CheckItem(Item item)
+    [HttpPost]
+    public async Task<IActionResult> CheckItem([FromBody]Item item)
     {
         try
         {

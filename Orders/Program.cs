@@ -10,7 +10,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.WebHost.UseUrls("http://*:7001");
 builder.Services.AddDbContext<OrderDbContext>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 //builder.Services.AddTransient<IOrderService, OrderService>();
@@ -24,7 +24,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseAuthorization();
 

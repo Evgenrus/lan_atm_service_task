@@ -4,6 +4,7 @@ using Infrastructure.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Extensions;
 using System.Text.Json;
+using System.Net;
 
 namespace Delivery.Services;
 
@@ -34,6 +35,7 @@ public class DeliveryService : IDeliveryService
         foreach (var item in delivery.ItemsInOrder)
         {
             var client = new HttpClient();
+            client.DefaultRequestHeaders.ConnectionClose = true;
 
             var itemJson = JsonSerializer.Serialize(item);
 

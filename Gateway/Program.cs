@@ -10,6 +10,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddOcelot();
+builder.Services.AddSwaggerForOcelot(builder.Configuration);
+
 builder.WebHost.UseUrls("http//*:7000");
 builder.WebHost.ConfigureAppConfiguration(webBuilder =>
 {
@@ -24,6 +26,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+//app.UseSwaggerForOcelotUI(options =>
+//{
+//    options.DownstreamSwaggerEndPointBasePath = "/swagger";
+//    options.PathToSwaggerGenerator = "/swagger/docs";
+//    options.SwaggerEndpoint("https://localhost:5201/swagger", "Authentication API");
+//});
 
 app.UseOcelot().Wait();
 
