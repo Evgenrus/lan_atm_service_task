@@ -3,6 +3,7 @@ using Delivery.Data.Entities;
 using Infrastructure.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Extensions;
+using System.Text.Json;
 
 namespace Delivery.Services;
 
@@ -32,6 +33,16 @@ public class DeliveryService : IDeliveryService
         }
         foreach (var item in delivery.ItemsInOrder)
         {
+            var client = new HttpClient();
+
+            var itemJson = JsonSerializer.Serialize(item);
+
+            var requestContent = new StringContent(itemJson, System.Text.Encoding.UTF8, "application/json");
+
+            var response = await client.PostAsync("http://localhost:7002/api/v1/Catalog/CheckItem", requestContent);
+
+            response.EnsureSuccessStatusCode();
+
             var delItem = new DeliveryItem
             {
                 Article = item.Article,
