@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Models;
+namespace Infrastructure.Models;
 
 public class Item
 {
@@ -8,5 +8,4 @@ public class Item
     public string Brand { get; set; }
     public string Category { get; set; }
     public int Count { get; set; }
-    public string? Descr { get; set; }
 }
