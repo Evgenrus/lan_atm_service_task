@@ -118,4 +118,22 @@ public class DeliveryController : ControllerBase
             return BadRequest(e.Message);
         }
     }
+
+    [HttpPost]
+    public async Task<IActionResult> RegisterCourier(CourierModel courier)
+    {
+        try
+        {
+            var res = await _service.RegisterCourier(
+                courier.Name, 
+                courier.Surname, 
+                courier.Email, 
+                courier.PhoneNumber);
+            return Ok(res);
+        } 
+        catch(Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
 }

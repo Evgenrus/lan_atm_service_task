@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Orders.Database;
 using Orders.Database.Entities;
+using System.Text.Json;
+using Infrastructure.Helpers;
 
 namespace Orders.Service;
 
@@ -21,34 +23,19 @@ public class OrderService : IOrderService
     public async Task<ICollection<Order>> GetAllCustomerOrders(int customerId)
     {
         var result = await _context.Orders.Where(x => x.CustomerId == customerId).ToListAsync();
-        // var result = await _context.Orders.Where(x => x.CustomerId == customerId).ToListAsync();
         return result;
-        //throw new NotImplementedException("Not implemented");
-    }
-    // public async Task<ICollection<Item>> GetItemById(int id)
-    // {
-    //     //var result = await _context.Items.Where(x => x.ItemId == id).ToListAsync();
-    //     //return result;
-    //     //throw new NotImplementedException("Not implemented");
-    // }
+     }
 
     public async Task AddItemToCart(int cartId, Item item, int count)
     {
         var cart = await _context.Carts.SingleOrDefaultAsync(x => x.CartId == cartId) ?? new Cart();
 
-        var client = new HttpClient();
-        var form = new FormUrlEncodedContent(new[]
-        {
-            new KeyValuePair<string, string>("ItemId" ,item.ItemId.ToString()),
-            new KeyValuePair<string, string>("Name", item.Name),
-            new KeyValuePair<string, string>("Article", item.Article),
-            new KeyValuePair<string, string>("Brand", item.Brand),
-            new KeyValuePair<string, string>("Category", item.Brand),
-            new KeyValuePair<string, string>("Count", item.Count.ToString()),
-            new KeyValuePair<string, string>("Descr", item.Descr ?? "")
-        });
-        HttpResponseMessage msg = await client.PostAsync("", form);
-        msg.EnsureSuccessStatusCode();
+        var httpHelper = new HttpRequestHelper(
+            "http://localhost:7002/api/v1/Catalog/CheckItem", HttpMethodsTypes.Post, item);
+
+        var response = await httpHelper.ExecuteRequest();
+
+        response.EnsureSuccessStatusCode();
 
         var itemcart = new CartItem
         {
@@ -101,13 +88,13 @@ public class OrderService : IOrderService
         }
 
         var cartItems = await _context.CartItems.Where(x => x.CartId == cart.CartId).ToListAsync();
-        if (cartItems.Count <= 0)
+        if (!cartItems.Any())
         {
             throw new NotImplementedException("Order is empty");
         }
 
         var orderItems = await CartItemsToOrderItems(cartItems, order);
-        if (orderItems.Count <= 0)
+        if (!orderItems.Any())
         {
             throw new NotImplementedException("OrderList is empty");
         }

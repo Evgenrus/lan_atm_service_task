@@ -1,0 +1,281 @@
+﻿{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/v1/Catalog/PostNewItem",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7002
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Catalog/PostNewItem",
+      "UpstreamHttpMethod": [ "Post" ],
+      "SwaggerKey": "Catalog"
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Catalog/PostNewCategory",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7002
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Catalog/PostNewCategory",
+      "UpstreamHttpMethod": [ "Post" ],
+      "SwaggerKey": "Catalog"
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Catalog/PostNewBrand",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7002
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Catalog/PostNewBrand",
+      "UpstreamHttpMethod": [ "Post" ],
+      "SwaggerKey": "Catalog"
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Catalog/GetItemsByBrandName",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7002
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Catalog/GetItemsByBrandName",
+      "UpstreamHttpMethod": [ "Get" ],
+      "SwaggerKey": "Catalog"
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Catalog/GetItemByName",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7002
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Catalog/GetItemByName",
+      "UpstreamHttpMethod": [ "Get" ],
+      "SwaggerKey": "Catalog"
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Catalog/GetItemById",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7002
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Catalog/GetItemById",
+      "UpstreamHttpMethod": [ "Get" ],
+      "SwaggerKey": "Catalog"
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Catalog/CheckItem",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7002
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Catalog/CheckItem",
+      "UpstreamHttpMethod": [ "Post" ],
+      "SwaggerKey": "Catalog"
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/v1/Order/CartItems",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7001
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Order/CartItems",
+      "UpstreamHttpMethod": [ "Get" ],
+      "SwaggerKey": "Order"
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/v1/Order/CancelOrder",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7001
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Order/CancelOrder",
+      "UpstreamHttpMethod": [ "Put" ],
+      "SwaggerKey": "Order"
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/v1/Order/CartItemCountChange",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7001
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Order/CartItemCountChange",
+      "UpstreamHttpMethod": [ "Put" ],
+      "SwaggerKey": "Order"
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/v1/Order/CreateOrder",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7001
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Order/CreateOrder",
+      "UpstreamHttpMethod": [ "Post" ],
+      "SwaggerKey": "Order"
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/v1/Order/FinishOrder",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7001
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Order/FinishOrder",
+      "UpstreamHttpMethod": [ "Put" ],
+      "SwaggerKey": "Order"
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/v1/Order/NewCustomer",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7001
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Order/NewCustomer",
+      "UpstreamHttpMethod": [ "Post" ],
+      "SwaggerKey": "Order"
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/v1/Order/PostItemToCart",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7001
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Order/PostItemToCart",
+      "UpstreamHttpMethod": [ "Post" ],
+      "SwaggerKey": "Order"
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/v1/Delivery/PostNewDelivery",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7003
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Delivery/PostNewDelivery",
+      "UpstreamHttpMethod": [ "Post" ],
+      "SwaggerKey": "Delivery"
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/v1/Delivery/AllFreeOrders",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7003
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Delivery/AllFreeOrders",
+      "UpstreamHttpMethod": [ "Get" ],
+      "SwaggerKey": "Delivery"
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/v1/Delivery/BeginDelivery",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7003
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Delivery/BeginDelivery",
+      "UpstreamHttpMethod": [ "Post" ],
+      "SwaggerKey": "Delivery"
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/v1/Delivery/ReceiveOrderFromStock",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7003
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Delivery/ReceiveOrderFromStock",
+      "UpstreamHttpMethod": [ "Post" ],
+      "SwaggerKey": "Delivery"
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/v1/Delivery/FinishDelivery",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7003
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Delivery/FinishDelivery",
+      "UpstreamHttpMethod": [ "Post" ],
+      "SwaggerKey": "Delivery"
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/v1/Delivery/DeliveryStatus",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7003
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Delivery/DeliveryStatus",
+      "UpstreamHttpMethod": [ "Get" ],
+      "SwaggerKey": "Delivery"
+    }
+
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:7000"
+  }
+}

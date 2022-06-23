@@ -9,7 +9,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.WebHost.UseUrls("http://*:7002");
+//builder.WebHost.UseUrls("http://*:7002");
 builder.Services.AddTransient<ICatalogService, CatalogService>();
 builder.Services.AddDbContext<CatalogDbContext>();
 
@@ -24,8 +24,12 @@ if (app.Environment.IsDevelopment())
 
 //app.UseHttpsRedirection();
 
+app.UseRouting();
 app.UseAuthorization();
-
-app.MapControllers();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+});
+//app.MapControllers();
 
 app.Run();

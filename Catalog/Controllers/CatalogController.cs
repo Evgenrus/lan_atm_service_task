@@ -9,13 +9,13 @@ namespace Catalog.Controllers;
 [Route("api/v1/[controller]/[action]")]
 public class CatalogController : ControllerBase
 {
-    private CatalogDbContext _context { get; set; }
-    private ICatalogService _service { get; set; }
+    private CatalogDbContext Context { get; set; }
+    private ICatalogService Service { get; set; }
 
     public CatalogController(CatalogDbContext context, ICatalogService service)
     {
-        _context = context;
-        _service = service;
+        Context = context;
+        Service = service;
     }
 
     [HttpPost]
@@ -23,7 +23,7 @@ public class CatalogController : ControllerBase
     {
         try
         {
-            var res = await _service.CheckItem(item);
+            var res = await Service.CheckItem(item);
             return Ok(res);
         }
         catch (Exception e)
@@ -32,12 +32,31 @@ public class CatalogController : ControllerBase
         }
     }
 
+    [HttpPost]
+    public async Task<IActionResult> CheckItems([FromBody]List<Item> items)
+    {
+        var VerifiedItems = new List<Item>();
+        foreach(var item in items)
+        {
+            try
+            {
+                var res = await Service.CheckItem(item);
+                VerifiedItems.Add(res);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+        return Ok(VerifiedItems);
+    }
+
     [HttpGet]
     public async Task<IActionResult> GetItemById(int id)
     {
         try
         {
-            var prods = await _service.ItemById(id);
+            var prods = await Service.ItemById(id);
             return Ok(prods);
         }
         catch (Exception e)
@@ -51,7 +70,7 @@ public class CatalogController : ControllerBase
     {
         try
         {
-            var prods = await _service.ItemByName(name);
+            var prods = await Service.ItemByName(name);
             return Ok(prods);
         }
         catch (Exception e)
@@ -65,7 +84,7 @@ public class CatalogController : ControllerBase
     {
         try
         {
-            var prods = await _service.ItemsByBrandName(name);
+            var prods = await Service.ItemsByBrandName(name);
             return Ok(prods);
         }
         catch (Exception e)
@@ -79,7 +98,7 @@ public class CatalogController : ControllerBase
     {
         try
         {
-            await _service.NewItem(model);
+            await Service.NewItem(model);
             return Ok();
         }
         catch (Exception e)
@@ -91,8 +110,14 @@ public class CatalogController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> PostNewBrand(BrandModel model)
     {
-        await _service.NewBrand(model);
-        return Ok();
+        try
+        {
+            await Service.NewBrand(model);
+            return Ok();
+        } catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
     }
 
     [HttpPost]
@@ -100,7 +125,7 @@ public class CatalogController : ControllerBase
     {
         try
         {
-            await _service.NewCategory(model);
+            await Service.NewCategory(model);
             return Ok();
         }
         catch (Exception e)

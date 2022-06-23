@@ -11,4 +11,5 @@ public interface IDeliveryService
     public Task ReceiveOrderFromStock(int orderId, int courierId);
     public Task FinishDelivery(int orderId);
     public Task<DeliveryInfo> DeliveryStatus(int orderId);
+    public Task<CourierModel> RegisterCourier(string name, string surname, string email, string phone);
 }

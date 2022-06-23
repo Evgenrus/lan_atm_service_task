@@ -25,7 +25,7 @@ public class OrderController : ControllerBase
     {
         try
         {
-            var res = _service.CartItems(id);
+            var res = await _service.CartItems(id);
             return Ok(res);
         }
         catch (Exception ex)

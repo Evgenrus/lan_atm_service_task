@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Extensions;
 using System.Text.Json;
 using System.Net;
+using Infrastructure.Helpers;
 
 namespace Delivery.Services;
 
@@ -32,19 +33,15 @@ public class DeliveryService : IDeliveryService
         {
             throw new Exception("Order is empty");
         }
+
+        var httpHelper = new HttpRequestHelper(
+            "http://localhost:7002/api/v1/Catalog/CheckItems", HttpMethodsTypes.Post, delivery.ItemsInOrder);
+        var response = await httpHelper.ExecuteRequest();
+
+        response.EnsureSuccessStatusCode();
+
         foreach (var item in delivery.ItemsInOrder)
         {
-            var client = new HttpClient();
-            client.DefaultRequestHeaders.ConnectionClose = true;
-
-            var itemJson = JsonSerializer.Serialize(item);
-
-            var requestContent = new StringContent(itemJson, System.Text.Encoding.UTF8, "application/json");
-
-            var response = await client.PostAsync("http://localhost:7002/api/v1/Catalog/CheckItem", requestContent);
-
-            response.EnsureSuccessStatusCode();
-
             var delItem = new DeliveryItem
             {
                 Article = item.Article,
@@ -83,7 +80,7 @@ public class DeliveryService : IDeliveryService
 
         if (order.Courier is not null)
         {
-            throw new NotImplementedException("this order is already delivering");
+            throw new ArgumentException("this order is already delivering");
         }
 
         var courier = await _context.Couriers
@@ -117,12 +114,12 @@ public class DeliveryService : IDeliveryService
 
         if (order.CourierId <= 0)
         {
-            throw new NotImplementedException("this order is not assigned to any courier");
+            throw new ArgumentException("this order is not assigned to any courier");
         }
 
         if (order.Status != Data.Entities.DeliveryStatus.Assigned)
         {
-            throw new NotImplementedException("Wrong status. required status 'Assigned';");
+            throw new ArgumentException("Wrong status. required status 'Assigned';");
         }
         order.Status = Data.Entities.DeliveryStatus.Taken;
 
@@ -140,12 +137,12 @@ public class DeliveryService : IDeliveryService
 
         if (order.CourierId <= 0)
         {
-            throw new NotImplementedException("this order is not assigned to any courier");
+            throw new ArgumentException("this order is not assigned to any courier");
         }
 
         if (order.Status != Data.Entities.DeliveryStatus.Taken)
         {
-            throw new NotImplementedException("Wrong status. required status 'Taken';");
+            throw new ArgumentException("Wrong status. required status 'Taken';");
         }
         order.Status = Data.Entities.DeliveryStatus.Finished;
 
@@ -159,7 +156,7 @@ public class DeliveryService : IDeliveryService
             .SingleOrDefaultAsync(x => x.OrderDeliveryId == orderId);
         if (order is null)
         {
-            throw new NotImplementedException("wrong orderId");
+            throw new ArgumentException("wrong orderId");
         }
 
         var items = DeliveryItemsToItems(order.OrderedItems);
@@ -191,5 +188,31 @@ public class DeliveryService : IDeliveryService
         }
 
         return result;
+    }
+
+    public async Task<CourierModel> RegisterCourier(string name, string surname, string email, string phone)
+    {
+        var check = await _context.Couriers.AnyAsync(x =>
+            (x.Name == name && x.Surname == surname) ||
+            (x.PhoneNumber == phone) ||
+            (x.Email == email));
+
+        if(check == true)
+        {
+            throw new ArgumentException("Courier with this number, email or name and surname already exists");
+        }
+
+        var ins = new Courier { Email = email, Name = name, Surname = surname, PhoneNumber = phone };
+
+        var courier = _context.Couriers.AddAsync(ins).Result.Entity;
+
+        return new CourierModel
+        {
+            Id = courier.CourierId,
+            Name = courier.Name,
+            Surname = courier.Surname,
+            Email = courier.Email,
+            PhoneNumber = courier.PhoneNumber
+        };
     }
 }

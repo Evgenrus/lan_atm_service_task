@@ -73,7 +73,7 @@ public class CatalogService : ICatalogService
 
         if (check.Stock.Stock < item.Count)
         {
-            throw new Exception($"requested {item.Count} items, but got inly {check.Stock.Stock}");
+            throw new ArgumentException($"requested {item.Count} items, but got inly {check.Stock.Stock}");
         }
 
         return new Item
@@ -85,6 +85,46 @@ public class CatalogService : ICatalogService
             ItemId = check.ProductId,
             Name = item.Name
         };
+    }
+
+    public async Task<ICollection<Item>> CheckItems(ICollection<Item> items) {
+        if (items.Any())
+        {
+            throw new ArgumentNullException("Items list is empty");
+        }
+        var res = new List<Item>();
+        foreach(var item in items)
+        {
+            var itemcatalog = _context.Products
+            .Include(x => x.Brand)
+            .Include(x => x.Category)
+            .Include(x => x.Stock);
+
+            var check = await itemcatalog.FirstOrDefaultAsync(x => x.Name == item.Name
+                                                             && x.Article == item.Article);
+            if (check is null)
+            {
+                throw new Exception("No such item");
+            }
+
+            if (check.Stock.Stock < item.Count)
+            {
+                throw new ArgumentException($"requested {item.Count} items, but got inly {check.Stock.Stock}");
+            }
+
+            var toAdd = new Item
+            {
+                Article = item.Article,
+                Brand = check.Brand.Name,
+                Category = check.Category.Name,
+                Count = item.Count,
+                ItemId = check.ProductId,
+                Name = item.Name
+            };
+            res.Add(toAdd);
+        }
+
+        return res;
     }
 
     public async Task<Item?> ItemById(int id)
@@ -164,7 +204,7 @@ public class CatalogService : ICatalogService
             throw new ArgumentException("Wrong Brand Name");
         }
 
-        if (brand.Products.Count == 0)
+        if (!brand.Products.Any())
             throw new ArgumentException("No matching Items");
 
         foreach (var product in brand.Products)
